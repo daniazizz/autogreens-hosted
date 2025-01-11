@@ -90,8 +90,6 @@ DATABASES = {
     }
 }
 
-# print all environment variables:
-print(os.environ)
 
 CSRF_TRUSTED_ORIGINS = [
     'https://django-server-production-757a.up.railway.app',
