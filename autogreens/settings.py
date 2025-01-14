@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
+    'rest_framework',
+    'rest_framework.authtoken',  # Required for token-based authentication
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -94,6 +97,29 @@ DATABASES = {
 CSRF_TRUSTED_ORIGINS = [
     'https://django-server-production-757a.up.railway.app',
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # Token-based authentication
+        'rest_framework.authentication.SessionAuthentication',  # Session-based authentication
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',  # Default permission
+    ],
+}
+
+DJOSER = {
+    'LOGIN_FIELD': 'username',  # Use email as the login field
+    'USER_CREATE_PASSWORD_RETYPE': True,  # Require password retype on user creation
+    'SEND_ACTIVATION_EMAIL': False,  # Disable activation emails (configure this as needed)
+    'SERIALIZERS': {
+        'user_create': 'djoser.serializers.UserCreateSerializer',
+        'user': 'djoser.serializers.UserSerializer',
+    },
+}
+
+
 
 
 # Password validation
